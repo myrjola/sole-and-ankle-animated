@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components/macro';
+import styled, {keyframes} from 'styled-components/macro';
 
 import { WEIGHTS } from '../../constants';
 import { formatPrice, pluralize, isNewShoe } from '../../utils';
@@ -82,15 +82,9 @@ const ImageWrapper = styled.div`
 const Image = styled.img`
   width: 100%;
   display: block;
-  transition: transform 200ms;
+  transition: transform 200ms, filter 200ms;
   transform-origin: center 60%;
-`;
-
-const Wrapper = styled.article`
-  &:hover ${Image} {
-    transform: scale(1.3);
-    transition: transform 500ms;
-  }
+  filter: contrast(100%);
 `;
 
 const Row = styled.div`
@@ -131,6 +125,37 @@ const Flag = styled.div`
   color: var(--color-white);
   border-radius: 2px;
 `;
+
+const wiggle = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  
+  25% {
+    transform: rotate(-5deg)
+  }
+  
+  75% {
+    transform: rotate(5deg);
+  }
+  
+  100% {
+    transform: rotate(0deg);
+  }
+`
+
+const Wrapper = styled.article`
+  &:hover ${Image} {
+    transform: scale(1.3);
+    filter: contrast(150%);
+    transition: transform 500ms, filter 200ms;
+  }
+  
+  &:hover ${Flag} {
+    animation: ${wiggle} 200ms;
+  }
+`;
+
 
 const SaleFlag = styled(Flag)`
   background-color: var(--color-primary);
