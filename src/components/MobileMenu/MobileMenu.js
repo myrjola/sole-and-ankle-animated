@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import styled from 'styled-components/macro';
+import styled, {keyframes} from 'styled-components/macro';
 import { DialogOverlay, DialogContent } from '@reach/dialog';
 
 import { QUERIES, WEIGHTS } from '../../constants';
@@ -12,7 +12,7 @@ import VisuallyHidden from '../VisuallyHidden';
 const MobileMenu = ({ isOpen, onDismiss }) => {
   return (
     <Overlay isOpen={isOpen} onDismiss={onDismiss}>
-      <Content aria-label="Menu">
+      <Content aria-label="Menu" isOpen={isOpen}>
         <CloseButton onClick={onDismiss}>
           <Icon id="close" />
           <VisuallyHidden>Dismiss menu</VisuallyHidden>
@@ -45,6 +45,8 @@ const Overlay = styled(DialogOverlay)`
   background: var(--color-backdrop);
   display: flex;
   justify-content: flex-end;
+  transition: opacity 200ms;
+  opacity: ${p => p.isOpen ? '1' : '0'};
 `;
 
 const Content = styled(DialogContent)`
@@ -54,6 +56,8 @@ const Content = styled(DialogContent)`
   padding: 24px 32px;
   display: flex;
   flex-direction: column;
+  transition: transform 200ms;
+  transform: translateX(${p => p.isOpen ? '0' : '100%' });
 `;
 
 const CloseButton = styled(UnstyledButton)`
