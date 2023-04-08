@@ -114,16 +114,40 @@ const Filler = styled.div`
   }
 `;
 
-const NavLink = styled.a`
+const FancyLink = styled.a`
   font-size: 1.125rem;
   text-transform: uppercase;
   text-decoration: none;
   color: var(--color-gray-900);
   font-weight: ${WEIGHTS.medium};
+  height: 27px;
+  overflow: hidden;
 
   &:first-of-type {
     color: var(--color-secondary);
   }
+  
+  & > div {
+    transition: transform 200ms;
+  }
+  
+  &:hover > div {
+    transform: translateY(-27px);
+  }
 `;
+
+const Bold = styled.div`
+  font-weight: bold;
+`
+
+const NavLink = (props) => {
+  return <FancyLink href={props.href}>
+    <div>
+      <div>{props?.children}</div>
+      <Bold>{props?.children}</Bold>
+    </div>
+  </FancyLink>
+}
+
 
 export default Header;
