@@ -20,12 +20,12 @@ const Header = () => {
           <Logo />
         </LogoWrapper>
         <DesktopNav>
-          <NavLink href="/sale">Sale</NavLink>
-          <NavLink href="/new">New&nbsp;Releases</NavLink>
-          <NavLink href="/men">Men</NavLink>
-          <NavLink href="/women">Women</NavLink>
-          <NavLink href="/kids">Kids</NavLink>
-          <NavLink href="/collections">Collections</NavLink>
+          <NavLink href="/sale" data-hover="Sale">Sale</NavLink>
+          <NavLink href="/new" data-hover="New Releases">New&nbsp;Releases</NavLink>
+          <NavLink href="/men" data-hover="Men">Men</NavLink>
+          <NavLink href="/women" data-hover="Women">Women</NavLink>
+          <NavLink href="/kids" data-hover="Kids">Kids</NavLink>
+          <NavLink href="/collections" data-hover="Collections">Collections</NavLink>
         </DesktopNav>
         <MobileActions>
           <ShoppingBagButton>
@@ -114,40 +114,40 @@ const Filler = styled.div`
   }
 `;
 
-const FancyLink = styled.a`
+const NavLink = styled.a`
+  position: relative;
+  background: white;
   font-size: 1.125rem;
   text-transform: uppercase;
   text-decoration: none;
   color: var(--color-gray-900);
   font-weight: ${WEIGHTS.medium};
-  height: 27px;
-  overflow: hidden;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transform-origin: 50% 0;
+  transition: transform 0.3s;
 
   &:first-of-type {
     color: var(--color-secondary);
   }
   
-  & > div {
-    transition: transform 200ms;
+  &:hover {
+    transform: rotateX(90deg);
   }
-  
-  &:hover > div {
-    transform: translateY(-27px);
+
+  &:before {
+    position: absolute;
+    color: white;
+    background: black;
+    top: 100%;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    content: attr(data-hover);
+    font-weight: bold;
+    transform: rotateX(-90deg);
+    transform-origin: 50% 0;
   }
 `;
-
-const Bold = styled.div`
-  font-weight: bold;
-`
-
-const NavLink = (props) => {
-  return <FancyLink href={props.href}>
-    <div>
-      <div>{props?.children}</div>
-      <Bold>{props?.children}</Bold>
-    </div>
-  </FancyLink>
-}
-
 
 export default Header;
