@@ -73,15 +73,24 @@ const Link = styled.a`
   color: inherit;
 `;
 
-const Wrapper = styled.article``;
-
 const ImageWrapper = styled.div`
   position: relative;
+  border-radius: 16px 16px 4px 4px;
+  overflow: hidden;
 `;
 
 const Image = styled.img`
   width: 100%;
-  border-radius: 16px 16px 4px 4px;
+  display: block;
+  transition: transform 200ms;
+  transform-origin: center 60%;
+`;
+
+const Wrapper = styled.article`
+  &:hover ${Image} {
+    transform: scale(1.3);
+    transition: transform 500ms;
+  }
 `;
 
 const Row = styled.div`
